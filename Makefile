@@ -15,8 +15,8 @@ EXECUTABLE	= doom-fire-$(PROJ_VER)
 
 SENTRY      = $(BIN_DIR)/sentry
 CC			= g++
-CFLAGS		= -std=c++20 -c -Wall -g -I$(INC_DIR) -D_REENTRANT
-LDFLAGS		= -L/usr/lib/x86_64-linux-gnu -lSDL2 -lSDL2_ttf
+CFLAGS		= -std=c++2a -c -Wall -g -I$(INC_DIR) -D_REENTRANT
+LDFLAGS		= -L/usr/lib/x86_64-linux-gnu -lSDL2 -lSDL2_ttf -lSDL2_image
 
 all: $(SENTRY) $(EXECUTABLE)
 
@@ -25,13 +25,13 @@ $(SENTRY):
 	@mkdir -p bin
 	@touch $@
 
-$(EXECUTABLE): $(HEADERS) $(OBJECTS) $(LIBS)
+$(EXECUTABLE): $(OBJECTS) $(LIBS)
 	$(CC) $(OBJECTS) -o $@ $(LIBS) $(LDFLAGS)
 
-$(BIN_DIR)/%.o: $(SRC_DIR)/%.cpp
+$(BIN_DIR)/%.o: $(SRC_DIR)/%.cpp $(HEADERS)
 	$(CC) $(CFLAGS) -o $@ $<
 
-run:
+run: $(EXECUTABLE)
 	./$(EXECUTABLE)
 
 clean:

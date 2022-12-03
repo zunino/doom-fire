@@ -20,12 +20,14 @@ A basic outline of how it works:
 ## Dependencies
 
 - [SDL2](https://www.libsdl.org/)
+- [SDL2-TTF](https://github.com/libsdl-org/SDL_ttf)
+- [SDL2-Image](https://github.com/libsdl-org/SDL_image)
 - [Seidel](https://github.com/zunino/seidel) (included in this repository)
 
 For Debian-based distros:
 
 ```sh
-sudo apt install libsdl2-dev
+sudo apt install -y libsdl2-dev libsdl2-ttf-dev libsdl2-image-dev
 ```
 
 ## Building and executing
@@ -35,7 +37,7 @@ make run
 ```
 
 Note: The included _Makefile_ uses g++, but you should be able to build with any
-compiler supporting C++20.
+compiler supporting C++17.
 
 ## Controls
 

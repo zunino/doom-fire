@@ -1,6 +1,9 @@
 #include <vector>
 #include <cmath>
 
+#include <seidel/Window.hpp>
+#include <seidel/Random.hpp>
+
 #include <fire.hpp>
 
 namespace {
@@ -35,10 +38,6 @@ Wind::Wind(int strength) {
         throw "Wind strength value out of acceptable range";
     }
     this->strength = strength;
-}
-
-Wind::operator int() const {
-    return this->strength;
 }
 
 Wind& Wind::operator--() {
