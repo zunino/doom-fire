@@ -14,14 +14,14 @@ A basic outline of how it works:
 - Upon each animation update, the fire cells are traversed and if they refer to
   any color other than black, a cell above it is modified to refer to the next
   (less intense) color in the palette.
-- The actual cell that is updated is chosen randomnly and takes "wind" into
+- The actual cell that is updated is chosen randomly and takes "wind" into
   consideration.
 
 ## Dependencies
 
 - [SDL2](https://www.libsdl.org/)
-- [SDL2-TTF](https://github.com/libsdl-org/SDL_ttf)
-- [SDL2-Image](https://github.com/libsdl-org/SDL_image)
+    - [SDL2-TTF](https://github.com/libsdl-org/SDL_ttf)
+    - [SDL2-Image](https://github.com/libsdl-org/SDL_image)
 - [Seidel](https://github.com/zunino/seidel) (included in this repository)
 
 For Debian-based distros:
