@@ -30,12 +30,37 @@ std::vector<SDL_Color> make_palette(const std::vector<SDL_Color>& basic_colors) 
     return palette;
 }
 
+Wind::Wind(int strength) {
+    if (strength < Wind::MIN_VALUE || strength > Wind::MAX_VALUE) {
+        throw "Wind strength value out of acceptable range";
+    }
+    this->strength = strength;
+}
+
+Wind::operator int() const {
+    return this->strength;
+}
+
+Wind& Wind::operator--() {
+    if (this->strength > Wind::MIN_VALUE) {
+        --this->strength;
+    }
+    return *this;
+}
+
+Wind& Wind::operator++() {
+    if (this->strength < Wind::MAX_VALUE) {
+        ++this->strength;
+    }
+    return *this;
+}
+
 DoomFire::DoomFire()
 : DoomFire(default_colors) {
 }
 
 DoomFire::DoomFire(const std::vector<SDL_Color>& basic_colors)
-: fire{} {
+: fire{}, wind{0} {
     this->fire_palette = make_palette(basic_colors);
     for (std::size_t col = 0; col < FIRE_COLS; ++col) {
         this->fire[FIRE_ROWS - 1][col] = this->fire_palette.size() - 1;
@@ -47,7 +72,12 @@ void DoomFire::update() {
         for (std::size_t col = 0; col < FIRE_COLS; ++col) {
             std::size_t curr_color_idx = this->fire[row][col];
             if (curr_color_idx != 0) {
-                std::size_t col_idx = col - sdl::random(0, 1) % FIRE_COLS;
+                std::size_t col_idx;
+                if (this->wind != 0) {
+                    col_idx = (col + sdl::random(0, this->wind)) % FIRE_COLS;
+                } else {
+                    col_idx = (col + sdl::random(-1, 1)) % FIRE_COLS;
+                }
                 this->fire[row - 1][col_idx] = curr_color_idx - sdl::random(0, 1);
             }
         }
@@ -65,4 +95,12 @@ void DoomFire::draw(sdl::Window &window) {
             SDL_RenderFillRect(window.renderer(), &cell_rect);
         }
     }
+}
+
+void DoomFire::increase_wind_left() {
+    --this->wind;
+}
+
+void DoomFire::increase_wind_right() {
+    ++this->wind;
 }

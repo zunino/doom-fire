@@ -9,7 +9,7 @@ SRC_DIR		= src
 BIN_DIR		= bin
 HEADERS     = $(INC_DIR)/fire.hpp
 OBJECTS		= $(addprefix $(BIN_DIR)/, $(addsuffix .o, $(UNITS)))
-SEIDEL      = seidel-0.12.0
+SEIDEL      = seidel-0.12.1
 LIBS		= lib/$(SEIDEL).a
 EXECUTABLE	= doom-fire-$(PROJ_VER)
 
